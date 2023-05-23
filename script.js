@@ -92,7 +92,7 @@ const handleScroll = () => {
         scrollDirection = -1; // Scrolling to the left
     }
     prevScrollLeft = currentScrollLeft;
-    setTimeout(() => showHideIcons(), 1000);
+    setTimeout(() => showHideIcons(), 550);
     updateActivePoint();
 };
 
@@ -109,3 +109,16 @@ carousel.addEventListener("scroll", handleScroll);
 
 showHideIcons();
 updateActivePoint();
+
+setInterval(() => {
+    const scrollWidth = carousel.scrollWidth - carousel.clientWidth;
+    if (carousel.scrollLeft === scrollWidth) {
+        // Reached the end, scroll back to the beginning
+        carousel.scrollLeft = 0;
+    } else {
+        // Scroll to the next image
+        carousel.scrollLeft += imageWidth;
+    }
+    setTimeout(() => showHideIcons(), 550);
+    updateActivePoint();
+}, 5000);
